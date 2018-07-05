@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Reputation System Prototype</title>
+
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="./node_modules/web3/dist/web3.min.js" type="application/json"></script>
+
+</head>
+<body>
+  <div class="container">
+
+    <h1>Rate San Francisco</h1>
+
+    <img src="img/sfbridge.jpg" alt="Smiley face" width="200" height="150">
+    <br>
+    <h4>Last Change</h4>
+    <h4 id="lastchange"></h4>
+
+    <br><br>
+    <label for="name" class="col-lg-2 control-label">Rating</label>
+    <input id="rating" type="text">
+
+    <label for="name" class="col-lg-2 control-label">Comment</label>
+    <input id="comment" type="text">
+
+    <button id="button">Confirm Tx</button>
+
+    <p>Current Address: <div id="address">-</div> </p>
+
+  </div>
+
+  <script>
+   if (typeof web3 !== 'undefined') {
+     web3 = new Web3(web3.currentProvider);
+   } else {
+     web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+   }
+
+   web3.eth.defaultAccount = web3.eth.accounts[0];
+
+   web3.eth.getAccounts(function(error, result) {
+     if (!error) {
+       $("#address").html(web3.eth.defaultAccount);
+     } else
+     console.log(error);
+   });
+
+   var LikeTokenContract = web3.eth.contract([
+   {
+    "constant": false,
+    "inputs": [
+    {
+      "name": "_comment",
+      "type": "string"
+    },
+    {
+      "name": "_rating",
+      "type": "uint256"
+    }
+    ],
+    "name": "setReview",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getReview",
+    "outputs": [
+    {
+      "name": "",
+      "type": "string"
+    },
+    {
+      "name": "",
+      "type": "uint256"
+    }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+  ]);
+
+   var LikeToken = LikeTokenContract.at('0xa8dba8425a8199b43d7592a1445657ec04e6db30');
+
+   LikeToken.getReview(function(error, result) {
+     if (!error) {
+       $("#lastchange").html('Rating: '+result[1]+' <br> Comments: '+result[0]);
+     } else
+     console.log(error);
+   });
+
+   $("#button").click(function() {
+    LikeToken.setReview($("#comment").val(), $("#rating").val(), function(error, result) {
+      if(!error)
+        console.log(JSON.stringify(result));
+      else
+        console.error(error);
+    });
+  });
+
+</script>
+
+</body>
+
+</html>
