@@ -1,12 +1,23 @@
 {
   "name": "reputation-system-prototype",
-  "version": "0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "description": "Early model of a secure blockchain-based Reputation System",
   "main": "truffle.js",
   "directories": {
     "test": "test"
   },
+  "homepage": "http://liketoken.network/",
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "smart",
+    "contracts",
+    "protocol",
+    "like-token",
+    "like-protocol",
+    "reputation-system"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/LIKE-Token/reputation-system-prototype.git"
