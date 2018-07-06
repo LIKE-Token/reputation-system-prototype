@@ -52,42 +52,46 @@
    });
 
    var LikeTokenContract = web3.eth.contract([
-   {
-    "constant": false,
-    "inputs": [
     {
-      "name": "_comment",
-      "type": "string"
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_comment",
+          "type": "string"
+        },
+        {
+          "name": "_rating",
+          "type": "uint256"
+        }
+      ],
+      "name": "setReview",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
-      "name": "_rating",
-      "type": "uint256"
+      "constant": true,
+      "inputs": [],
+      "name": "getReview",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
     }
-    ],
-    "name": "setReview",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getReview",
-    "outputs": [
-    {
-      "name": "",
-      "type": "string"
-    },
-    {
-      "name": "",
-      "type": "uint256"
-    }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  }
   ]);
 
    var LikeToken = LikeTokenContract.at('0xa8dba8425a8199b43d7592a1445657ec04e6db30');
