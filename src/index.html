@@ -53,6 +53,23 @@
 
    var LikeTokenContract = web3.eth.contract([
     {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "comment",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "rating",
+          "type": "uint256"
+        }
+      ],
+      "name": "ReviewPerformed",
+      "type": "event"
+    },
+    {
       "constant": false,
       "inputs": [
         {
@@ -94,11 +111,19 @@
     }
   ]);
 
-   var LikeToken = LikeTokenContract.at('0xa8dba8425a8199b43d7592a1445657ec04e6db30');
+   var LikeToken = LikeTokenContract.at('0x367c685c48e037cfdf418ddf55b16de6ffb7262d');
 
    LikeToken.getReview(function(error, result) {
      if (!error) {
        $("#lastchange").html('Rating: '+result[1]+' <br> Comments: '+result[0]);
+     } else
+     console.log(error);
+   });
+
+   var reviewPerformed = LikeToken.ReviewPerformed();
+   reviewPerformed.watch(function(error, result) {
+     if (!error) {
+       $("#lastchange").html('Rating: '+result.args.rating +' <br> Comments: '+result.args.comment);
      } else
      console.log(error);
    });
@@ -110,6 +135,7 @@
       else
         console.error(error);
     });
+
   });
 
 </script>
