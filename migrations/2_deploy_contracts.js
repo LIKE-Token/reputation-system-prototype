@@ -1,7 +1,7 @@
-var Review = artifacts.require("./Review.sol");
-var Testnet = artifacts.require("./ReputationTestnet.sol");
+var TutorialToken = artifacts.require("LikeToken");
 
 module.exports = function(deployer) {
-  deployer.deploy(Review);
-  deployer.deploy(Testnet);
+  
+    deployer.deploy(TutorialToken);
+
 };
