@@ -1,145 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Reputation System Prototype</title>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>LikeToken - Test</title>
 
-  <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="./node_modules/web3/dist/web3.min.js" type="application/json"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <img src="img/liketoken.png" class="rounded center-block" alt="Like Token">
+      </div>
 
-</head>
-<body>
-  <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">My Wallet</h3>
+            </div>
+            <div class="panel-body">
+              <h4>Balance</h4>
+              <strong>Balance</strong>: <span id="LKEBalance"></span> LKE<br/><br/>
+              <h4>Transfer</h4>
+              <input type="text" class="form-control" id="LKETransferAddress" placeholder="Address" />
+              <br/>
+              <input type="text" class="form-control" id="LKETransferAmount" placeholder="Amount" />
+              <br/>
+              <button class="btn btn-primary" id="transferButton" type="button">Transfer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <h1>Rate San Francisco</h1>
-
-    <img src="img/sfbridge.jpg" alt="Smiley face" width="200" height="150">
-    <br>
-    <h4>Last Change</h4>
-    <h4 id="lastchange"></h4>
-
-    <br><br>
-    <label for="name" class="col-lg-2 control-label">Rating</label>
-    <input id="rating" type="text">
-
-    <label for="name" class="col-lg-2 control-label">Comment</label>
-    <input id="comment" type="text">
-
-    <button id="button">Confirm Tx</button>
-
-    <p>Current Address: <div id="address">-</div> </p>
-
-  </div>
-
-  <script>
-   if (typeof web3 !== 'undefined') {
-     web3 = new Web3(web3.currentProvider);
-   } else {
-     web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-   }
-
-   web3.eth.defaultAccount = web3.eth.accounts[0];
-
-   web3.eth.getAccounts(function(error, result) {
-     if (!error) {
-       $("#address").html(web3.eth.defaultAccount);
-     } else
-     console.log(error);
-   });
-
-   var LikeTokenContract = web3.eth.contract([
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "comment",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "name": "rating",
-          "type": "uint256"
-        }
-      ],
-      "name": "ReviewPerformed",
-      "type": "event"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_comment",
-          "type": "string"
-        },
-        {
-          "name": "_rating",
-          "type": "uint256"
-        }
-      ],
-      "name": "setReview",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "getReview",
-      "outputs": [
-        {
-          "name": "",
-          "type": "string"
-        },
-        {
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    }
-  ]);
-
-   var LikeToken = LikeTokenContract.at('0x367c685c48e037cfdf418ddf55b16de6ffb7262d');
-
-   LikeToken.getReview(function(error, result) {
-     if (!error) {
-       $("#lastchange").html('Rating: '+result[1]+' <br> Comments: '+result[0]);
-     } else
-     console.log(error);
-   });
-
-   var reviewPerformed = LikeToken.ReviewPerformed();
-   reviewPerformed.watch(function(error, result) {
-     if (!error) {
-       $("#lastchange").html('Rating: '+result.args.rating +' <br> Comments: '+result.args.comment);
-     } else
-     console.log(error);
-   });
-
-   $("#button").click(function() {
-    LikeToken.setReview($("#comment").val(), $("#rating").val(), function(error, result) {
-      if(!error)
-        console.log(JSON.stringify(result));
-      else
-        console.error(error);
-    });
-
-  });
-
-</script>
-
-</body>
-
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>

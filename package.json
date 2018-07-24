@@ -26,13 +26,11 @@
     "dev": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "files": [
-  ],
   "author": "Like Token Protocol <contact@liketoken.network>",
   "devDependencies": {
-    "lite-server": "^2.3.0",
-    "ganache-cli": "^6.0.3",
-    "npm": "^7.5.0",
-    "truffle": "^4.1.11"
+    "lite-server": "^2.3.0"
+  },
+  "dependencies": {
+    "openzeppelin-solidity": "^1.11.0"
   }
 }
