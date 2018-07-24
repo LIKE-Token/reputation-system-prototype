@@ -15,11 +15,9 @@ Early model of a secure blockchain-based Reputation System
     npm install openzeppelin-solidity
     ```
 
-4. Install `Metamask`
-    Official website: https://metamask.io
+4. Install [Metamask](https://metamask.io)
 
-5. Install `Ganache`
-    Official website: https://truffleframework.com/ganache
+5. Install [Ganache](https://truffleframework.com/ganache)
 
 6. Install `Lite Server`
     ```javascript
