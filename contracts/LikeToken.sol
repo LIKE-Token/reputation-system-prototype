@@ -6,7 +6,7 @@ contract LikeToken is StandardToken {
 
     string public name = "LikeToken";
     string public symbol = "LKE";
-    uint8 public decimals = 3;
+    uint8 public decimals = 2;
     uint public INITIAL_SUPPLY = 1000000;
 
     constructor() public {
