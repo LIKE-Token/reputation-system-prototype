@@ -4,6 +4,7 @@
   "license": "MIT",
   "description": "Early model of a secure blockchain-based Reputation System",
   "main": "truffle.js",
+  "bugs": "https://github.com/LIKE-Token/reputation-system-prototype/issues",
   "directories": {
     "test": "test"
   },
