@@ -1,3 +1,6 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.com/LIKE-Token/reputation-system-prototype.svg?branch=master)](https://travis-ci.com/LIKE-Token/reputation-system-prototype)
+
 # reputation-system-prototype
 Early model of a secure blockchain-based Reputation System
 
